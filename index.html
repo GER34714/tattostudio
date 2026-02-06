@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="es-AR">
 <head>
@@ -14,13 +13,10 @@
   <meta property="og:title" content="Leo Argañaraz — Tatuajes" />
   <meta property="og:description" content="San José, Entre Ríos • Turnos por WhatsApp • Galería de trabajos • Estilos y cuidados." />
   <meta property="og:type" content="website" />
-  <!-- Reemplazá por una imagen OG real (ideal 1200x630) -->
-  <meta property="og:image" content="https://iili.io/f1N6ICF.jpg" />
+  <meta property="og:image" content="https://iili.io/fbKG9GR.md.jpg" />
 
-  <!-- Favicon (reemplazar por tu logo real) -->
-  <link rel="icon" href="https://iili.io/f1N6ICF.jpg" />
+  <link rel="icon" href="https://iili.io/fbKG9GR.md.jpg" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
@@ -36,42 +32,66 @@
       --gold:#d8b26e;
       --gold2:#f3d49a;
       --ok:#46f0a1;
-      --danger:#ff6161;
 
       --shadow: 0 12px 40px rgba(0,0,0,.55);
       --shadow2: 0 8px 24px rgba(0,0,0,.45);
       --r: 18px;
       --r2: 26px;
       --max: 1160px;
+
+      /* Overlay */
+      --overlay-url: url("https://iili.io/fbKG9GR.md.jpg");
+      --overlay-opacity: .22;
+      --overlay-blur: 0px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+    html{ overflow-x:hidden; }
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 700px at 15% 10%, rgba(216,178,110,.12), transparent 60%),
-                  radial-gradient(900px 500px at 80% 25%, rgba(255,255,255,.08), transparent 55%),
-                  radial-gradient(900px 600px at 50% 90%, rgba(216,178,110,.08), transparent 60%),
-                  var(--bg);
       color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(216,178,110,.12), transparent 60%),
+        radial-gradient(900px 500px at 80% 25%, rgba(255,255,255,.08), transparent 55%),
+        radial-gradient(900px 600px at 50% 90%, rgba(216,178,110,.08), transparent 60%),
+        var(--bg);
       overflow-x:hidden;
     }
 
-    /* subtle noise */
+    /* Overlay de fondo (adaptado a PC y móviles) */
     body::before{
       content:"";
       position:fixed; inset:0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      opacity:.22;
+      background-image: var(--overlay-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: var(--overlay-opacity);
+      filter: blur(var(--overlay-blur));
+      transform: translateZ(0);
       pointer-events:none;
       z-index:0;
+    }
+
+    /* Vignette + contraste para que no “apague” la web */
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(900px 600px at 50% 10%, rgba(0,0,0,.15), rgba(0,0,0,.75)),
+        linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.68));
+      pointer-events:none;
+      z-index:0;
+      opacity:.85;
     }
 
     a{ color:inherit; text-decoration:none; }
     .wrap{ position:relative; z-index:1; }
 
+    /* Hard-stop contra desplazamientos en mobile */
+    img, video, canvas, svg{ max-width:100%; height:auto; }
     .container{
       width:min(var(--max), calc(100% - 40px));
       margin:0 auto;
@@ -102,6 +122,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,.45);
       position:relative;
       overflow:hidden;
+      flex: 0 0 auto;
     }
     .logo::after{
       content:"";
@@ -160,6 +181,7 @@
       cursor:pointer;
       user-select:none;
       white-space:nowrap;
+      max-width: 100%;
     }
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); }
     .btn:active{ transform: translateY(0px) scale(.99); }
@@ -181,12 +203,11 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       color: rgba(242,242,244,.82);
+      max-width: 100%;
     }
 
     /* Hero */
-    .hero{
-      padding: 46px 0 22px;
-    }
+    .hero{ padding: 46px 0 22px; }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -217,10 +238,7 @@
     }
     .hero-left > *{ position:relative; z-index:1; }
 
-    .kicker{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-bottom: 12px;
-    }
+    .kicker{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 12px; }
 
     h1{
       margin: 0;
@@ -258,10 +276,7 @@
     .stat b{ display:block; font-size:14px; letter-spacing:.02em; }
     .stat span{ display:block; color: var(--muted); font-size:12px; margin-top:4px; }
 
-    .hero-right{
-      display:flex;
-      flex-direction:column;
-    }
+    .hero-right{ display:flex; flex-direction:column; }
     .hero-photo{
       height: 100%;
       min-height: 290px;
@@ -275,11 +290,13 @@
       object-fit: cover;
       filter: contrast(1.08) saturate(1.05);
       transform: scale(1.03);
+      display:block;
     }
     .hero-photo::after{
       content:"";
       position:absolute; inset:0;
       background: linear-gradient(180deg, rgba(7,7,10,.20), rgba(7,7,10,.86));
+      pointer-events:none;
     }
     .hero-badge{
       position:absolute;
@@ -352,22 +369,11 @@
       margin-bottom: 10px;
       box-shadow: 0 12px 24px rgba(0,0,0,.35);
     }
-    .mini h3{
-      margin:0 0 6px;
-      font-size: 14px;
-      letter-spacing:.02em;
-    }
-    .mini p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
+    .mini h3{ margin:0 0 6px; font-size: 14px; letter-spacing:.02em; }
+    .mini p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 
     /* Gallery */
-    .gallery{
-      padding: 16px;
-    }
+    .gallery{ padding: 16px; }
     .toolbar{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; flex-wrap:wrap;
@@ -399,6 +405,7 @@
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.22);
+      min-width: 0;
     }
     .search input{
       width:100%;
@@ -407,13 +414,15 @@
       outline:none;
       color: var(--text);
       font-size: 13px;
+      min-width: 0;
     }
     .search input::placeholder{ color: rgba(242,242,244,.50); }
 
     .masonry{
       display:grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 10px;
+      width:100%;
     }
     .shot{
       grid-column: span 4;
@@ -484,9 +493,7 @@
       border-top:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
     }
-    .lb-meta{
-      min-width: 0;
-    }
+    .lb-meta{ min-width: 0; }
     .lb-meta b{
       display:block;
       font-size: 13px;
@@ -521,20 +528,14 @@
     .icon-btn:active{ transform: translateY(0px) scale(.99); }
 
     /* Booking */
-    .booking{
-      padding: 16px;
-    }
+    .booking{ padding: 16px; }
     .form{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-top: 10px;
     }
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap: 7px;
-    }
+    .field{ display:flex; flex-direction:column; gap: 7px; min-width: 0; }
     .field label{
       font-size: 12px;
       color: rgba(242,242,244,.80);
@@ -549,6 +550,7 @@
       color: var(--text);
       outline: none;
       font-size: 13px;
+      min-width: 0;
     }
     .field textarea{ min-height: 110px; resize: vertical; grid-column: 1 / -1; }
 
@@ -560,11 +562,7 @@
     }
 
     /* Accordion */
-    .acc{
-      padding: 8px 0 0;
-      display:grid;
-      gap: 10px;
-    }
+    .acc{ padding: 8px 0 0; display:grid; gap: 10px; }
     details{
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
@@ -607,7 +605,7 @@
     }
     .foot small{ display:block; color: rgba(242,242,244,.55); margin-top:8px; line-height:1.5; }
 
-    /* Floating CTA */
+    /* Floating CTA — NO TAPA TEXTO */
     .float{
       position: fixed;
       right: 14px;
@@ -619,11 +617,18 @@
       padding: 10px;
       border-radius: 20px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(7,7,10,.64);
+      background: rgba(7,7,10,.66);
       backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
+      max-width: calc(100% - 28px);
     }
     .float .btn{ box-shadow: none; }
+
+    /* Dejá espacio abajo en mobile así NUNCA tapa contenido */
+    body{ padding-bottom: 86px; }
+    @media (max-width: 560px){
+      body{ padding-bottom: 108px; }
+    }
 
     /* Reveal */
     .reveal{ opacity:0; transform: translateY(10px); transition: .55s ease; }
@@ -636,24 +641,24 @@
       .grid-3{ grid-template-columns: 1fr; }
       .grid-2{ grid-template-columns: 1fr; }
       .form{ grid-template-columns: 1fr; }
-      .masonry{ grid-template-columns: repeat(6, 1fr); }
+      .masonry{ grid-template-columns: repeat(6, minmax(0,1fr)); }
       .shot{ grid-column: span 3; }
     }
     @media (max-width: 560px){
       .container{ width: min(var(--max), calc(100% - 26px)); }
       .nav{ display:none; }
       .hero-stats{ grid-template-columns: 1fr; }
-      .masonry{ grid-template-columns: repeat(4, 1fr); }
+      .masonry{ grid-template-columns: repeat(4, minmax(0,1fr)); }
       .shot{ grid-column: span 4; }
       .shot img{ height: 240px; }
       .float{ left: 10px; right: 10px; bottom: 10px; justify-content:space-between; }
+      .btn{ width: auto; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <!-- TOPBAR -->
     <div class="topbar">
       <div class="container">
         <div class="topbar-inner">
@@ -680,7 +685,6 @@
       </div>
     </div>
 
-    <!-- HERO -->
     <header class="hero" id="inicio">
       <div class="container">
         <div class="hero-grid">
@@ -694,8 +698,7 @@
             <h1>Tu próximo tattoo, con estilo y prolijidad.</h1>
             <p class="sub">
               Soy Leo Argañaraz, artista tatuador en <b>San José (Entre Ríos)</b>. Te asesoro con tamaño, ubicación y estilo,
-              y trabajamos con un proceso claro para que te lleves un tattoo que te represente.
-              Mirá la galería y pedí tu turno en 1 minuto.
+              y lo armamos como corresponde. Mirá la galería y pedí tu turno en 1 minuto.
             </p>
 
             <div class="cta-row">
@@ -710,30 +713,26 @@
 
             <div class="hero-stats">
               <div class="stat">
-                <b>Diseño & asesoramiento</b>
-                <span>Te guío para que quede bien en tu cuerpo.</span>
+                <b>Asesoramiento real</b>
+                <span>Te guío para que quede bien.</span>
               </div>
               <div class="stat">
                 <b>Turnos simples</b>
                 <span>Coordinamos rápido por WhatsApp.</span>
               </div>
               <div class="stat">
-                <b>Trabajo real</b>
-                <span>Galería con piezas y estilos.</span>
+                <b>Galería</b>
+                <span>Trabajos y estilos para ver.</span>
               </div>
             </div>
           </div>
 
           <div class="hero-right reveal">
             <div class="card hero-photo">
-              <!-- Reemplazá esta imagen por una tuya (ideal: foto laburando / estudio / tattoo) -->
-              <img
-                loading="lazy"
-                src="https://iili.io/f1N6ICF.jpg"
-                alt="Tatuajes - Leo Argañaraz" />
+              <img loading="lazy" src="https://iili.io/f1N6ICF.jpg" alt="Tatuajes - Leo Argañaraz" />
               <div class="hero-badge">
                 <b>arganarazleo</b>
-                <p>San José, Entre Ríos • Turnos por WhatsApp • Consultas con referencias por chat</p>
+                <p>San José, Entre Ríos • Turnos por WhatsApp • Mandá referencias por chat</p>
               </div>
             </div>
           </div>
@@ -741,13 +740,12 @@
       </div>
     </header>
 
-    <!-- SERVICIOS -->
     <section id="servicios">
       <div class="container">
         <div class="section-head reveal">
           <div>
             <h2>Servicios</h2>
-            <p>De la idea al tattoo: te asesoro y armamos algo que quede sólido y con buena composición.</p>
+            <p>De la idea al tattoo: lo armamos para que quede sólido y bien compuesto.</p>
           </div>
         </div>
 
@@ -770,7 +768,7 @@
               </svg>
             </div>
             <h3>Turnos por WhatsApp</h3>
-            <p>Coordinamos día y horario por chat. Mandame referencias y te digo qué conviene.</p>
+            <p>Coordinamos por chat. Mandame referencias y te digo qué conviene.</p>
           </div>
 
           <div class="mini reveal">
@@ -781,13 +779,12 @@
               </svg>
             </div>
             <h3>Cuidados</h3>
-            <p>Te paso cuidados claros para que cicatrice bien y mantenga el color/líneas.</p>
+            <p>Te paso cuidados claros para que cicatrice bien y se mantenga impecable.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- GALERÍA -->
     <section id="galeria">
       <div class="container">
         <div class="section-head reveal">
@@ -812,13 +809,12 @@
       </div>
     </section>
 
-    <!-- HIGIENE -->
     <section id="higiene">
       <div class="container">
         <div class="section-head reveal">
           <div>
             <h2>Higiene y seguridad</h2>
-            <p>Proceso prolijo y ordenado. Si tenés dudas, preguntame por WhatsApp y te explico.</p>
+            <p>Proceso prolijo y ordenado. Si tenés dudas, preguntame por WhatsApp.</p>
           </div>
         </div>
 
@@ -826,19 +822,19 @@
           <div class="mini reveal">
             <div class="icon" aria-hidden="true">🧼</div>
             <h3>Espacio limpio</h3>
-            <p>Trabajo con limpieza y orden para que la sesión sea cómoda y segura.</p>
+            <p>Trabajo con limpieza y orden para una sesión cómoda y segura.</p>
           </div>
 
           <div class="mini reveal">
             <div class="icon" aria-hidden="true">🧷</div>
             <h3>Insumos adecuados</h3>
-            <p>Uso materiales correctos para un trabajo prolijo y buena cicatrización.</p>
+            <p>Materiales correctos para un laburo prolijo y buena cicatrización.</p>
           </div>
 
           <div class="mini reveal">
             <div class="icon" aria-hidden="true">🧤</div>
             <h3>Cuidados en el proceso</h3>
-            <p>Te explico antes de arrancar qué se hace y cómo cuidarlo después.</p>
+            <p>Te explico antes de arrancar y cómo cuidarlo después.</p>
           </div>
 
           <div class="mini reveal">
@@ -850,12 +846,11 @@
       </div>
     </section>
 
-    <!-- TURNOS -->
     <section id="turnos">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Pedí tu turno</h2>
+            <h2>Pedir turno</h2>
             <p>Completá y te abre WhatsApp con el mensaje armado. Adjuntá referencias en el chat.</p>
           </div>
         </div>
@@ -867,21 +862,18 @@
               <p style="margin:0; color:var(--muted); line-height:1.6; font-size:13px;">
                 1) Me contás la idea • 2) Te recomiendo estilo/tamaño/ubicación • 3) Coordinamos turno • 4) Sesión • 5) Cuidados.
               </p>
-              <p class="help">
-                Tip: mandame referencias (fotos, screenshots, links) por WhatsApp.
-              </p>
+              <p class="help">Tip: mandame referencias (fotos, screenshots, links) por WhatsApp.</p>
             </div>
 
             <div class="mini" style="background: rgba(0,0,0,.20);">
-              <h3 style="margin:0 0 8px; font-family:Cinzel,serif; letter-spacing:.06em;">Datos del perfil</h3>
+              <h3 style="margin:0 0 8px; font-family:Cinzel,serif; letter-spacing:.06em;">Datos</h3>
               <p style="margin:0; color:var(--muted); line-height:1.6; font-size:13px;">
                 📍 San José, Entre Ríos<br>
                 📸 Instagram: <b style="color:rgba(242,242,244,.9);">@arganarazleo</b><br>
-                🤝 Colabs: <b style="color:rgba(242,242,244,.9);">@pueblo.tt</b> • <b style="color:rgba(242,242,244,.9);">@malatempora.mt</b>
+                🤝 Colabs: <b style="color:rgba(242,242,244,.9);">@pueblo.tt</b> • <b style="color:rgba(242,242,244,.9);">@malatempora.mt</b><br>
+                📱 WhatsApp: <b style="color:rgba(242,242,244,.9);">11 7083-3040</b>
               </p>
-              <p class="help">
-                Si es cover-up o zona difícil, contame bien así lo encaramos como corresponde.
-              </p>
+              <p class="help">Si es cover-up o zona difícil, contame bien así lo encaramos.</p>
             </div>
           </div>
 
@@ -944,7 +936,6 @@
       </div>
     </section>
 
-    <!-- FAQ -->
     <section id="faq">
       <div class="container">
         <div class="section-head reveal">
@@ -977,7 +968,6 @@
       </div>
     </section>
 
-    <!-- CONTACTO -->
     <section id="contacto">
       <div class="container">
         <div class="section-head reveal">
@@ -1008,7 +998,7 @@
               </div>
 
               <p class="help" style="margin-top:12px;">
-                Recomendado: subí tus fotos reales a la galería (reemplazá las de ejemplo).
+                Reemplazá las fotos de galería por tus trabajos reales (links directos .jpg/.png).
               </p>
             </div>
           </div>
@@ -1028,7 +1018,6 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
       <div class="container">
         <div class="foot">
@@ -1048,14 +1037,12 @@
       </div>
     </footer>
 
-    <!-- FLOATING CTA -->
+    <!-- FLOAT -->
     <div class="float" aria-label="Acciones rápidas">
       <span class="pill" style="border-color: rgba(216,178,110,.22); background: rgba(216,178,110,.08);">
         ⭐ <span style="color:rgba(242,242,244,.86)">Pedí turno</span>
       </span>
-      <a class="btn btn-primary" id="btnWhatsFloat" href="#" rel="noopener">
-        📲 WhatsApp
-      </a>
+      <a class="btn btn-primary" id="btnWhatsFloat" href="#" rel="noopener">📲 WhatsApp</a>
     </div>
 
     <!-- LIGHTBOX -->
@@ -1083,15 +1070,10 @@
        CONFIG RÁPIDA (EDITAR ACÁ)
        =========================== */
 
-    // WhatsApp (Argentina). Si el número real fuera de otra característica, ajustalo acá.
-    // Perfil muestra: 1170833040 => wa.me necesita "549" + número (sin +, sin espacios)
-    const WHATSAPP_NUMBER = "5491170833040";
-
+    const WHATSAPP_NUMBER = "5491170833040"; // wa.me requiere internacional sin +
     const ARTIST_NAME = "Leo Argañaraz";
-    const IG_HANDLE = "@arganarazleo";
     const ZONE = "San José, Entre Ríos";
 
-    // Galería (reemplazá por tus fotos reales)
     const GALLERY = [
       { src: "https://iili.io/f1wgcNt.jpg", title: "Tradicional — pieza", desc: "Color y contraste.", tags: ["Tradicional"] },
       { src: "https://iili.io/f1wL0YJ.jpg", title: "Blackwork — geométrico", desc: "Negro sólido y líneas.", tags: ["Blackwork"] },
@@ -1101,12 +1083,9 @@
       { src: "https://iili.io/f1NEFCF.jpg", title: "Sombreado", desc: "Transiciones suaves.", tags: ["Blackwork"] }
     ];
 
-    /* ===========================
-       HELPERS
-       =========================== */
+    /* Helpers */
     const $ = (s, el=document) => el.querySelector(s);
     const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
-
     const uniq = (arr) => [...new Set(arr)];
     const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
@@ -1116,8 +1095,7 @@
     }
 
     function buildDefaultMsg(){
-      return `Hola! Soy ${ARTIST_NAME} 🙌\n\n` +
-             `Quiero pedir un turno.\n\n` +
+      return `Hola! Quiero pedir un turno con ${ARTIST_NAME} (${ZONE}) 🙌\n\n` +
              `• Nombre:\n• Estilo:\n• Tamaño aprox:\n• Zona del cuerpo:\n• Día/Hora preferido:\n• Idea / referencias:\n\n` +
              `Gracias!`;
     }
@@ -1138,20 +1116,18 @@
              `Te adjunto referencias por acá. Gracias!`;
     }
 
-    /* ===========================
-       NAV WhatsApp
-       =========================== */
+    /* WhatsApp links */
     const btns = ["#btnWhatsTop", "#btnWhatsHero", "#btnWhatsContact", "#btnWhatsFloat"].map(id => $(id)).filter(Boolean);
-    btns.forEach(b => b.href = waLink(buildDefaultMsg()));
+    function refreshWA(){
+      const msg = buildDefaultMsg();
+      btns.forEach(b => b.href = waLink(msg));
+    }
+    refreshWA();
 
-    /* ===========================
-       YEAR
-       =========================== */
+    /* Year */
     $("#year").textContent = new Date().getFullYear();
 
-    /* ===========================
-       REVEAL
-       =========================== */
+    /* Reveal */
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -1162,9 +1138,7 @@
     }, { threshold: .14 });
     $$(".reveal").forEach(el => io.observe(el));
 
-    /* ===========================
-       GALLERY RENDER + FILTER
-       =========================== */
+    /* Gallery render */
     const chipsEl = $("#chips");
     const gridEl = $("#grid");
     const qEl = $("#q");
@@ -1187,13 +1161,11 @@
       });
       return el;
     }
-
     TAGS.forEach(t => chipsEl.appendChild(chipBtn(t)));
 
     function match(item){
       const okTag = (activeTag === "Todos") || item.tags.includes(activeTag);
       if(!okTag) return false;
-
       if(!query) return true;
       const hay = (item.title + " " + item.desc + " " + item.tags.join(" ")).toLowerCase();
       return hay.includes(query.toLowerCase());
@@ -1238,9 +1210,7 @@
 
     render();
 
-    /* ===========================
-       LIGHTBOX
-       =========================== */
+    /* Lightbox */
     const lb = $("#lb");
     const lbMedia = $("#lbMedia");
     const lbTitle = $("#lbTitle");
@@ -1284,9 +1254,7 @@
     btnPrev.addEventListener("click", prev);
     btnClose.addEventListener("click", closeLightbox);
 
-    lb.addEventListener("click", (e)=>{
-      if(e.target === lb) closeLightbox();
-    });
+    lb.addEventListener("click", (e)=>{ if(e.target === lb) closeLightbox(); });
 
     window.addEventListener("keydown", (e)=>{
       if(!lb.classList.contains("open")) return;
@@ -1311,9 +1279,7 @@
       }
     }, { passive:true });
 
-    /* ===========================
-       BOOKING FORM -> WhatsApp + Copy
-       =========================== */
+    /* Booking */
     const form = $("#bookingForm");
     const btnCopy = $("#btnCopy");
 
@@ -1356,16 +1322,6 @@
         setTimeout(()=> btnCopy.innerHTML = "<span aria-hidden='true'>📋</span> Copiar mensaje", 1200);
       }
     });
-
-    /* ===========================
-       Update WhatsApp links
-       =========================== */
-    function refreshWA(){
-      const msg = buildDefaultMsg();
-      btns.forEach(b => b.href = waLink(msg));
-    }
-    refreshWA();
   </script>
 </body>
 </html>
-```
